@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Management System - Download</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 0.5; }
+        }
+
+        .header {
+            position: relative;
+            z-index: 10;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .app-showcase {
+            perspective: 1000px;
+            margin-bottom: 4rem;
+        }
+
+        .app-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .app-card:hover {
+            transform: rotateX(5deg) rotateY(5deg) scale(1.02);
+        }
+
+        .app-preview {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .preview-screen {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(145deg, #2d3748, #1a202c);
+            border-radius: 15px;
+            border: 3px solid #4a5568;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .screen-header {
+            height: 30px;
+            background: #2d3748;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            gap: 0.5rem;
+        }
+
+        .window-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .close { background: #ff5f57; }
+        .minimize { background: #ffbd2e; }
+        .maximize { background: #28ca42; }
+
+        .screen-content {
+            padding: 2rem;
+            height: calc(100% - 30px);
+            background: linear-gradient(145deg, #f7fafc, #edf2f7);
+            color: #2d3748;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .download-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 4rem;
+        }
+
+        .download-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .download-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            color: #000;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4);
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-icon {
+            font-size: 1.5rem;
+        }
+
+        .file-info {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .requirements {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .requirements h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #00ff88;
+        }
+
+        .req-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .req-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .req-check {
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 2rem; }
+            .download-title { font-size: 2rem; }
+            .app-card { padding: 2rem 1rem; }
+            .features { grid-template-columns: 1fr; }
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .floating-element:nth-child(odd) {
+            animation-delay: -4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="floating-element" style="top: 10%; left: 10%; font-size: 3rem;">💊</div>
+    <div class="floating-element" style="top: 20%; right: 15%; font-size: 2.5rem;">🏥</div>
+    <div class="floating-element" style="bottom: 20%; left: 20%; font-size: 2rem;">⚕️</div>
+    <div class="floating-element" style="bottom: 30%; right: 25%; font-size: 3.5rem;">🔬</div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="logo">PharmaCare Pro</h1>
+            <p class="tagline">Complete Pharmacy Management Solution</p>
+        </div>
+
+        <div class="app-showcase">
+            <div class="app-card">
+                <div class="app-preview">
+                    <div class="preview-screen">
+                        <div class="screen-header">
+                            <div class="window-button close"></div>
+                            <div class="window-button minimize"></div>
+                            <div class="window-button maximize"></div>
+                        </div>
+                        <div class="screen-content">
+                            <div class="app-icon">💊</div>
+                            <h3>Pharmacy Management System</h3>
+                            <p>Professional healthcare software solution</p>
+                        </div>
+                    </div>
+                </div>
+                <h2 style="text-align: center; margin-bottom: 1rem; font-size: 2rem;">Revolutionary Pharmacy Software</h2>
+                <p style="text-align: center; opacity: 0.9;">Streamline your pharmacy operations with our comprehensive management system featuring inventory control, sales tracking, and customer management.</p>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Inventory Management</h3>
+                <p>Track medicine stock, expiry dates, and lot numbers with automated alerts and comprehensive reporting.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">Sales & Billing</h3>
+                <p>Generate invoices, process payments, and maintain detailed sales records with built-in calculator.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3 class="feature-title">Customer Database</h3>
+                <p>Maintain customer profiles, prescription history, and provide personalized healthcare services.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3 class="feature-title">Advanced Search</h3>
+                <p>Quick search functionality to find medicines by name, reference number, or batch details.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3 class="feature-title">Reports & Analytics</h3>
+                <p>Generate detailed reports on sales, inventory, and business performance with visual charts.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3 class="feature-title">Secure Database</h3>
+                <p>MySQL-powered secure data storage with backup and recovery features for data protection.</p>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2 class="download-title">Download Now</h2>
+            <p class="download-subtitle">Get the complete pharmacy management solution in one executable file</p>
+            <a href="https://drive.google.com/uc?export=download&id=1Skx6Z5SJNJ-TO7rSASu6TUe6ep8XRkFF" class="download-btn" target="_blank">
+                <span class="download-icon">⬇️</span>
+                Download pharma.exe
+            </a>
+            <div class="file-info">
+                <p>File size: ~25 MB | Version: 1.0 | Compatible with Windows 7/8/10/11</p>
+            </div>
+        </div>
+
+        <div class="requirements">
+            <h3>System Requirements</h3>
+            <div class="req-list">
+                <div class="req-item">
+                    <span class="req-check">✓</span>
+                    <span>Windows 7 or higher</span>
+                </div>
+                <div class="req-item">
+                    <span class="req-check">✓</span>
+                    <span>4 GB RAM minimum</span>
+                </div>
+                <div class="req-item">
+                    <span class="req-check">✓</span>
+                    <span>500 MB free disk space</span>
+                </div>
+                <div class="req-item">
+                    <span class="req-check">✓</span>
+                    <span>MySQL Server (included)</span>
+                </div>
+                <div class="req-item">
+                    <span class="req-check">✓</span>
+                    <span>1024x768 screen resolution</span>
+                </div>
+                <div class="req-item">
+                    <span class="req-check">✓</span>
+                    <span>Internet connection (optional)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 PharmaCare Pro. All rights reserved. | Developed with ❤️ Rithanya & Teams</p>
+    </div>
+
+    <script>
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const card = document.querySelector('.app-card');
+            const rect = card.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const mouseX = e.clientX - centerX;
+            const mouseY = e.clientY - centerY;
+            
+            const rotateX = (mouseY / rect.height) * 10;
+            const rotateY = (mouseX / rect.width) * 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        });
+
+        document.querySelector('.app-card').addEventListener('mouseleave', () => {
+            document.querySelector('.app-card').style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+        });
+
+        function downloadApp() {
+        const link = document.createElement('a');
+        link.href = 'pharma.exe';  
+        link.download = 'pharma.exe';  
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        }
+
+        function addScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.feature-card, .download-section, .requirements').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(50px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        window.addEventListener('load', () => {
+            createParticles();
+            addScrollAnimations();
+        });
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.background = 'rgba(255, 255, 255, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.background = 'rgba(255, 255, 255, 0.1)';
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
